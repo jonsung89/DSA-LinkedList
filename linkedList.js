@@ -28,6 +28,55 @@ class LinkedList {
     }
   }
 
+  insertBefore(newItem, currentItem) {
+    let prevNode = this.head;
+    let currentNode = this.head;
+
+    if (this.head === null) {
+      return null;
+    }
+
+    while (currentNode.value !== currentItem) {
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    prevNode.next = new _Node(newItem, currentNode);
+  }
+
+  insertAfter(newItem, currentItem) {
+    let currentNode = this.head;
+
+    if (!this.head) {
+      return null;
+    }
+    while ((currentNode !== null) && (currentNode.value !== currentItem)) {
+      currentNode = currentNode.next;
+    }
+    const nextNode = currentNode.next;
+    currentNode.next = new _Node(newItem, nextNode);
+  }
+
+  insertAt(newItem, n) {
+    if (n === 0 ) {
+      this.insertFirst(newItem);
+    }
+    if (!this.head) {
+      this.insertFirst(newItem);
+    }
+    
+    let count = 0;
+    let prevNode = this.head;
+    let currentNode = this.head;
+    let pos = n - 1;
+
+    while (count !== pos) {
+      count++;
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    prevNode.next = new _Node(newItem, currentNode);
+  }
+
   find(item) {
     // start at the head
     let currentNode = this.head;
@@ -73,3 +122,5 @@ class LinkedList {
     previousNode.next = currentNode.next;
   }
 }
+
+module.exports = LinkedList;
